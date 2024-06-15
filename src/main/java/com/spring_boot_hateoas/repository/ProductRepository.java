@@ -1,11 +1,9 @@
-package com.jmeter_test.spring_boot_jmeter.repository;
+package com.spring_boot_hateoas.repository;
 
-import com.jmeter_test.spring_boot_jmeter.entity.Product;
+import com.spring_boot_hateoas.entity.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
-
-    Product findByName(String name);
 }

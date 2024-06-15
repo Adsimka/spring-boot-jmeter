@@ -1,7 +1,8 @@
-package com.jmeter_test.spring_boot_jmeter.service;
+package com.spring_boot_hateoas.service;
 
-import com.jmeter_test.spring_boot_jmeter.entity.Product;
-import com.jmeter_test.spring_boot_jmeter.repository.ProductRepository;
+import com.spring_boot_hateoas.entity.Product;
+import com.spring_boot_hateoas.exception.ProductNotFoundException;
+import com.spring_boot_hateoas.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,10 +31,6 @@ public class ProductService {
                 .orElse(null);
     }
 
-    public Product findByName(String name) {
-        return repository.findByName(name);
-    }
-
     public List<Product> findAll() {
         return repository.findAll();
     }
@@ -47,9 +44,14 @@ public class ProductService {
     public Product update(Product product) {
         Product existingProduct = repository.findById(product.getId())
                 .orElse(null);
-        existingProduct.setName(product.getName());
-        existingProduct.setPrice(product.getPrice());
-        existingProduct.setQuantity(product.getQuantity());
+
+        if (existingProduct != null) {
+            existingProduct.setName(product.getName());
+            existingProduct.setPrice(product.getPrice());
+            existingProduct.setQuantity(product.getQuantity());
+        } else {
+            throw new ProductNotFoundException("Product not found");
+        }
 
         return repository.save(existingProduct);
     }

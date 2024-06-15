@@ -1,13 +1,13 @@
-package com.jmeter_test.spring_boot_jmeter;
+package com.spring_boot_hateoas;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringBootJmeterApplication {
+public class ApplicationRunner {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringBootJmeterApplication.class, args);
+		SpringApplication.run(ApplicationRunner.class, args);
 	}
 
 }
